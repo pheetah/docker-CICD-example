@@ -1,0 +1,21 @@
+version: '3'
+services:
+  my-react-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "3000:3000"
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+  my-tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    command: ["npm", "run", "test"]
+# without docker compose file, run this command
+# docker run -it -p 3000:3000 -v /home/node/app/node_modules -v $(pwd):/home/node/app 9051ddb98f01
